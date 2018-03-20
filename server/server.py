@@ -25,11 +25,13 @@ def hello():
 
 @app.route("/getfields")
 def getfields():
+    print("getfields")
     fields = Arcpy.ListFields("temp_layer")
     return json.dumps(fields)
 
 @app.route("/gettargets")
 def gettargets():
+    print("gettargets")
     targets = Arcpy.ListFields("temp_layer")
     return json.dumps(targets)
 
@@ -50,4 +52,4 @@ if __name__ == "__main__":
     #fillcolumn()
     arc = Arcpy()
     print(arc.listfields("temp_layer"))
-    app.run()
+    app.run(host="127.0.0.1", port=5000, threaded=True)

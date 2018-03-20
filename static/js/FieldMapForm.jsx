@@ -4,7 +4,6 @@ import { PageHeader } from "react-bootstrap";
 
 import Field from "./Field"
 import Target from "./Target"
-import Note from "./Note"
 import Fip from "./Fip"
 
 require('../css/fullstack.css');
@@ -41,6 +40,7 @@ export default class FieldMapForm extends React.Component {
     this.eachFip = this.eachFip.bind(this);
     this.addFip = this.addFip.bind(this);
     this.getfieldIDbyName = this.getfieldIDbyName.bind(this);
+
   }
 
   componentWillMount(){  // Stolen from lynda.com course files
@@ -49,7 +49,7 @@ export default class FieldMapForm extends React.Component {
 
       this.currentfieldstyle = {
         position:'absolute',
-        left: '600px',
+        left: '500px',
       };
 
       this.style = {
@@ -63,7 +63,15 @@ export default class FieldMapForm extends React.Component {
   }
 
   getFields(){
-    var self = this
+    var self = this;
+    var myFetch = {
+    	method: "GET",
+    	mode: "no-cors",
+    	headers: {
+    		"Accept":"text/plain",
+    		"Content-Type": "text/plain"
+    	}
+    };
     fetch('http://127.0.0.1:5000/getfields')
           .then(response => response.json())
           .then(json => {
@@ -71,28 +79,46 @@ export default class FieldMapForm extends React.Component {
                   self.addSource(json[i])
                 }
               }
-          );
+          ).catch(error => console.log('Oops,error:', error));
   }
 
   getTargets(){
-    var self = this
-    fetch('http://127.0.0.1:5000/gettargets')
-          .then(response => response.json())
-          .then(json => {
-                for(var i=0; i<json.length; i++){
-                  self.addTarget(json[i])
+      var self = this;
+      var myFetch = {
+      	method: "GET",
+      	mode: "no-cors",
+      	headers: {
+      		"Accept":"text/plain",
+      		"Content-Type": "text/plain"
+      	}
+      };
+      fetch('http://127.0.0.1:5000/gettargets')
+            .then(response => response.json())
+            .then(json => {
+                  for(var i=0; i<json.length; i++){
+                    self.addTarget(json[i])
+                  }
                 }
-              }
-          );
+            ).catch(error => console.log('Oops,error:', error));
   }
 
   loadForm(){
+    console.log("Start loadForm");
     this.getFields();
     this.getTargets();
+    console.log("End loadForm");
   }
 
   getFips(){
-    var self = this
+    var self = this;
+    var myFetch = {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Accept':'text/plain',
+        'Content-Type': 'text/plain'
+      }
+    };
     fetch('http://127.0.0.1:5000/getfips')
           .then(response => response.json())
           .then(json => {
@@ -100,7 +126,7 @@ export default class FieldMapForm extends React.Component {
                   self.addFip(json[i])
                 }
               }
-          );
+          ).catch(error => console.log('Oops,error:', error));
   }
 
   addSource(field){
@@ -170,9 +196,10 @@ export default class FieldMapForm extends React.Component {
       this.state.assigned[field] = true;  // store assign status of field
 
       var assignment = {"source": field, "target": targetID};  // NEW APPROACH
-      this.state.assigments.push(assignment); // NEW APPROACH
+      this.state.assignments.push(assignment); // NEW APPROACH
 
       var nextField = field;
+      console.log("field "+field);
 
       // Check if all assignments have been made
       if(Object.keys(this.state.assigned).length == this.state.targets.length){
@@ -231,7 +258,7 @@ export default class FieldMapForm extends React.Component {
     var x = 100;
     var y = i * 18 + 100;
     return (
-        <Field xpos={x} ypos={y}
+        <Field xpos={x} ypos={y} key={"field_"+i.toString()}
           name={field.name} id={"field_"+i} onChange={this.updateField}>
         </Field>
     )
@@ -241,7 +268,7 @@ export default class FieldMapForm extends React.Component {
     var x = Math.floor(i/10)*140 + 300;
     var y = (i % 10)*65 + 100;
     return (
-        <Target xpos={x} ypos={y} name={field.name} id={"target_"+i} onChange={this.updateTarget} >
+        <Target xpos={x} ypos={y} key={"target_"+i.toString()} name={field.name} id={"target_"+i} onChange={this.updateTarget} >
         </Target>
     )
   }
@@ -250,7 +277,7 @@ export default class FieldMapForm extends React.Component {
     var x = 10;
     var y = i * 18 + 100;
     return (
-      <Fip xpos={x} ypos={y}
+      <Fip xpos={x} ypos={y} key={i.toString()}
         name={fip.name} id={"fip_"+i} >
         {fip.name}
       </Fip>
