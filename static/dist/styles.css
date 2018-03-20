@@ -1,0 +1,76 @@
+.page-header {
+    min-height: 100%;
+    text-align: center;
+    background-image: url(6dbc46c3b053b7565875c93f53e7f277.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: -15px;
+}
+.header-contents {
+    top: 5%;
+    position:absolute;
+    font-size: 14px;
+}
+.header-contents h1 {
+    font-size: 80px;
+    font-weight: 300;
+}
+.header-contents button {
+    font-size: 35px;
+    border-radius: 30px;
+    font-weight: 300;
+}
+
+.header-contents button:focus {
+    outline: None;
+}
+
+.AssignedField{
+  background-color:"#666666";
+}
+
+.UnAssignedField{
+  background-color:"#CCCCCC";
+}
+
+.colstyle{
+  position: absolute;
+  left: 100px;
+}
+
+li {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+
+li:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+li:nth-child(2) {
+  top: 100px;
+  left: 0;
+}
+li:nth-child(3) {
+  top: 200px;
+  left: 0;
+}
+li:nth-child(4) {
+  top: 0;
+  left: 100px;
+}
+li:nth-child(5) {
+  top: 100px;
+  left: 100px;
+}
+li:nth-child(6) {
+  top: 200px;
+  left: 100px;
+}
+
+ul {
+  column-count: 2;
+  column-gap: 0;
+}
