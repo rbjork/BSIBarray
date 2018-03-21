@@ -2,6 +2,7 @@ class Arcpy(object):
 
     def __init__(self):
         self.data = []
+        self.env = Arcpy.env()
 
     @staticmethod
     def getfields():
@@ -19,3 +20,15 @@ class Arcpy(object):
     def listfields(self,layer):
         #fields = getfields()
         return "fields"
+
+    class env:
+        def __init__(self):
+            self._workspace = {}
+
+        @property
+        def workspace(self):
+            return self.workspace
+
+        @workspace.setter
+        def workspace(self,value):
+            self._workspace = value

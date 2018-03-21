@@ -60,6 +60,9 @@ export default class Target extends React.Component {
             top: this.props.ypos + 'px',
             backgroundColor: "#f0f0f0"
         };
+        this.style2 = {
+          backgroundColor: "#f0f0f0"
+        }
   }
 
   renderDisplay() {
@@ -67,7 +70,7 @@ export default class Target extends React.Component {
 			<div className="note" style={this.style}>
 
 				<span onClick={this.reset}>
-					<input type="checkbox" name={this.props.name} onClick={this.onClickHandler} value={this.props.name}></input><label > {this.props.name}</label><br></br>
+					<label ><input type="checkbox" name={this.props.name} onClick={this.onClickHandler} value={this.props.name}></input> {this.props.name}</label><br></br>
           <span id={this.props.id} style={sourcestyle}>{this.props.source}</span>
 				</span>
 			</div>

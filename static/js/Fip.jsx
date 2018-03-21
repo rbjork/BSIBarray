@@ -9,6 +9,12 @@ export default class Fip extends React.Component {
     this.state = {
       name:props.name
     }
+    this.onClickHandler = this.onClickHandler.bind(this);
+  }
+
+  onClickHandler(){
+    var fip = this.props.id.split('_')[1];
+    this.props.onChange(fip);
   }
 
   componentWillMount(){
@@ -21,6 +27,6 @@ export default class Fip extends React.Component {
   }
 
   render(){
-    return <div style={this.style}>{this.props.name}</div>
+    return <div style={this.style} onClick={this.onClickHandler}>{this.props.name}</div>
   }
 }

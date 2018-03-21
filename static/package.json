@@ -43,5 +43,8 @@
     "react-dom": "^15.6.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0"
+  },
+  "dependencies": {
+    "react-web-tabs": "^0.4.3"
   }
 }
